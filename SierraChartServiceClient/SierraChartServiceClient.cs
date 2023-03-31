@@ -229,6 +229,10 @@ namespace SierraChartServiceClient
         /// <summary>
         /// Lze zrusit PT a nasledne lze uzavrit pozici uzavrenim SL.
         /// Vhodne napriklad pri rychlem pohybu.
+        /// Cely tento kod funguje pouze s market objednavkou.
+        /// Cekajici objednavky se nepouzivaji.
+        /// Po vstupu se udela market objednavka + SL a PT.
+        /// Nasledne s nima muzeme pohybovat podle libosti.
         /// </summary>
         public static void MakePosition(string sierraInstrumentName, int sierraPosition, List<SierraOrder> sierraOrders)
         {
@@ -265,7 +269,10 @@ namespace SierraChartServiceClient
                 {
                     sierraInstrumentName = sierraInstrumentName.Substring("[Sim]".Length);
                 }
-                //sierraInstrumentName = sierraInstrumentName.Substring(0, 2);
+                if (sierraInstrumentName.StartsWith("NQ") || sierraInstrumentName.StartsWith("ES") || sierraInstrumentName.StartsWith("YM"))
+                {
+                    sierraInstrumentName = sierraInstrumentName.Substring(0, 2);
+                }
 
                 InstrumentConversion instrumentConversion = InstrumentConversion.InstrumentConversions.Find(x => x.SierraInstrumentName == sierraInstrumentName);
                 if (instrumentConversion == null)
