@@ -13,7 +13,7 @@ namespace SierraChartMT5Library
         {
             get
             {
-                if (instance == null)
+                if (instance == null || instance.apiClient.ConnectionState != Mt5ConnectionState.Connected)
                 {
                     instance = new SvpMT5();
                     instance.apiClient.BeginConnect(8228);
@@ -22,18 +22,15 @@ namespace SierraChartMT5Library
                         Thread.Sleep(100);
                     }
                 }
-                return instance;
+				return instance;
             }
-        }
-
-        public void Test()
-        {
-
         }
 
         private static SvpMT5 instance;
 
-        public void CloseOrder(long orderId)
+		public string Symbol => apiClient.ChartSymbol(0);
+
+		public void CloseOrder(long orderId)
         {
             apiClient.PositionClose((ulong)orderId);
         }

@@ -224,7 +224,7 @@ namespace SierraChartServiceClient
         }
 
         public static bool runned = false;
-        //public static int counter = 0;
+        public static int counter = 0;
 
         /// <summary>
         /// Lze zrusit PT a nasledne lze uzavrit pozici uzavrenim SL.
@@ -245,11 +245,11 @@ namespace SierraChartServiceClient
                     return;
                 }
 
-                //if (counter++ < 2)
-                //{
-                //    return;
-                //}
-                //counter = 0;
+                if (counter++ < 2)
+                {
+                    return;
+                }
+                counter = 0;
 
                 runned = true;
 
@@ -281,7 +281,13 @@ namespace SierraChartServiceClient
                     return;
                 }
 
-                OAOrders oaOrders = SvpMT5.Instance.GetMarketOrders(instrumentConversion.OandaInstrumentName);
+                //if (SvpMT5.Instance.Symbol != instrumentConversion.OandaInstrumentName)
+				//{
+				//	Log.WriteMessage("Wrong symbol on main graph " + SvpMT5.Instance.Symbol + " " + instrumentConversion.OandaInstrumentName);
+				//	return;
+				//}
+
+				OAOrders oaOrders = SvpMT5.Instance.GetMarketOrders(instrumentConversion.OandaInstrumentName);
 
                 List<PairedOrder> pairedOrders = DoPairOrders(instrumentConversion, oaOrders, sierraOrders);
 
