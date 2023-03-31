@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include "sierrachart.h"
+
+SCDLLName("Oanda")
+
+typedef int(__cdecl *MakePositionProcedure)(const char*, INT);
+
+SCSFExport scsf_Oanda(SCStudyGraphRef sc)
+{
+    if (sc.SetDefaults)
+    {
+        sc.GraphName = "OandaConnector";
+        sc.StudyDescription = "OandaConnector";
+        sc.GraphRegion = 0;
+        sc.FreeDLL = 1;
+        return;
+    }
+
+    HINSTANCE hinstLib = LoadLibrary(TEXT("SierraChartServiceClientBridge.dll"));
+    if (hinstLib != NULL)
+    {
+        MakePositionProcedure MakePosition = (MakePositionProcedure)GetProcAddress(hinstLib, "MakePosition");
+        if (MakePosition != NULL)
+        {
+            s_SCPositionData InternalPositionData;
+            sc.GetTradePosition(InternalPositionData);
+            MakePosition(InternalPositionData.Symbol.GetChars(), InternalPositionData.PositionQuantity);
+        }
+        FreeLibrary(hinstLib);
+    }
+}
+  
