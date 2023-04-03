@@ -16,7 +16,7 @@ namespace SierraChartServiceClient
         public static List<InstrumentConversion> InstrumentConversions = new List<InstrumentConversion>()
         {
 			new InstrumentConversion() { SierraInstrumentName = "XAUUSD", OandaInstrumentName = "XAUUSD", SL = 5, Compensation = 0.01 },
-            new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "USTEC", SL = 5, Compensation = 0.6 },
+            new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "USTEC", SL = 5, Compensation = 0.25 },
             new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500", SL = 2.5, Compensation = 0.2},
             new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30", SL = 20, Compensation = 1 }
 			//new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "[NQ100]", SL = 5, Compensation = 0.8 },
