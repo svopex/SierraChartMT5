@@ -15,10 +15,23 @@ namespace SierraChartServiceClient
 
         public static List<InstrumentConversion> InstrumentConversions = new List<InstrumentConversion>()
         {
-			new InstrumentConversion() { SierraInstrumentName = "XAUUSD", OandaInstrumentName = "XAUUSD", SL = 5, Compensation = 0.05 },
-            new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "USTEC", SL = 5, Compensation = 0.5 },
-            new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500", SL = 2.5, Compensation = 0.1 },
-            new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30", SL = 20, Compensation = 0.5 }
+            /*
+              Vypocet - kompenzace = spread na instrumentu u brokera - kolik je skutecny spread na burze
+            */
+            // FTMO - urceno vypoctem
+			new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "US100.cash", SL = 5, Compensation = 0.45 },
+			new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500.cash", SL = 2.5, Compensation = 0.15 },
+			new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30.cash", SL = 20, Compensation = 0.4 }
+            // BillionsClub - urceno vypoctem
+			//new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "NSDQ_raw", SL = 5, Compensation = 0.65 },
+			//new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "SP_raw", SL = 2.5, Compensation = 0.25 },
+			//new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "DOW_raw", SL = 20, Compensation = 0.9 }
+            // Ic markets - urceno pouze okometricky
+			//new InstrumentConversion() { SierraInstrumentName = "XAUUSD", OandaInstrumentName = "XAUUSD", SL = 5, Compensation = 0.05 },
+            //new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "USTEC", SL = 5, Compensation = 0.5 },
+            //new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500", SL = 2.5, Compensation = 0.1 },
+            //new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30", SL = 20, Compensation = 0.5 }
+            // Oanda - urceno pouze okometricky
 			//new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "[NQ100]", SL = 5, Compensation = 0.8 },
             //new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "[SP500]", SL = 2.5, Compensation = 0.4},
             //new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "[DJI30]", SL = 20, Compensation = 1 }
