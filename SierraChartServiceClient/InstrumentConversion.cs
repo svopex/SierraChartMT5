@@ -18,10 +18,14 @@ namespace SierraChartServiceClient
             /*
               Vypocet - kompenzace = spread na instrumentu u brokera - kolik je skutecny spread na burze
             */
+            // CapitalMarkets
+			new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "NSDQ_raw", SL = 20, Compensation = 1.47 },
+			new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "SP_raw", SL = 5, Compensation = 0.32 },
+			new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "DOW_raw", SL = 40, Compensation = 0.66 }
             // FTMO - urceno vypoctem
-			new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "US100.cash", SL = 5, Compensation = 0.45 },
-			new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500.cash", SL = 2.5, Compensation = 0.15 },
-			new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30.cash", SL = 20, Compensation = 0.4 }
+			//new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "US100.cash", SL = 5, Compensation = 0.45 },
+			//new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "US500.cash", SL = 2.5, Compensation = 0.15 },
+			//new InstrumentConversion() { SierraInstrumentName = "YM", OandaInstrumentName = "US30.cash", SL = 20, Compensation = 0.4 }
             // BillionsClub - urceno vypoctem
 			//new InstrumentConversion() { SierraInstrumentName = "NQ", OandaInstrumentName = "NSDQ_raw", SL = 5, Compensation = 0.65 },
 			//new InstrumentConversion() { SierraInstrumentName = "ES", OandaInstrumentName = "SP_raw", SL = 2.5, Compensation = 0.25 },
