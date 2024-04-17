@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using MtApi5;
 using OandaApiBusinessClass;
@@ -9,9 +10,20 @@ namespace SierraChartMT5Library
     {
         private readonly MtApi5Client apiClient = new MtApi5Client();
 
-        private const int VolumeDivider = 100;
+		private double GetDivider(string instrument)
+        {
+            string value = ConfigurationManager.AppSettings[instrument];
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return 0.01;
+            }
+            else
+            {
+                return Convert.ToDouble(value);
+            }
+		}
 
-        public static SvpMT5 Instance
+		public static SvpMT5 Instance
         {
             get
             {
@@ -56,7 +68,7 @@ namespace SierraChartMT5Library
             MqlTradeRequest mqlTradeRequest = new MqlTradeRequest();
             mqlTradeRequest.Action = ENUM_TRADE_REQUEST_ACTIONS.TRADE_ACTION_DEAL;
             mqlTradeRequest.Symbol = instrument;
-            mqlTradeRequest.Volume = ((double)Math.Abs(units)) / VolumeDivider;
+            mqlTradeRequest.Volume = ((double)Math.Abs(units)) * GetDivider(instrument);
             mqlTradeRequest.Type = units > 0 ? ENUM_ORDER_TYPE.ORDER_TYPE_BUY : ENUM_ORDER_TYPE.ORDER_TYPE_SELL;
             mqlTradeRequest.Magic = magic;
             // Todle zde musi byt kvuli ICMARKETS, jinak objednavky nechodi
@@ -82,8 +94,8 @@ namespace SierraChartMT5Library
                 oaOrder.Price = apiClient.PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE.POSITION_PRICE_OPEN);
                 oaOrder.SL = apiClient.PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE.POSITION_SL);
                 oaOrder.PT = apiClient.PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE.POSITION_TP);
-                oaOrder.Units = (long)(apiClient.PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE.POSITION_VOLUME) * VolumeDivider);
-                oaOrder.Instrument = apiClient.PositionGetString(ENUM_POSITION_PROPERTY_STRING.POSITION_SYMBOL);
+				oaOrder.Instrument = apiClient.PositionGetString(ENUM_POSITION_PROPERTY_STRING.POSITION_SYMBOL);
+				oaOrder.Units = (long)(apiClient.PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE.POSITION_VOLUME) / GetDivider(oaOrder.Instrument));
                 oaOrder.Magic = apiClient.PositionGetInteger(ENUM_POSITION_PROPERTY_INTEGER.POSITION_MAGIC);
                 oaOrder.Comment = apiClient.PositionGetString(ENUM_POSITION_PROPERTY_STRING.POSITION_COMMENT);
 

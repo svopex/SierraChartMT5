@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OandaApiBusinessClass.Entity
 {
-    /*
+	/*
     SierraChart.exe.config:
 
     <?xml version="1.0" encoding="utf-8" ?>
@@ -14,6 +14,10 @@ namespace OandaApiBusinessClass.Entity
       <connectionStrings>
         <add name="SQLConnectionString" connectionString="Server=127.0.0.1;Database=oandaapi;Uid=root;Pwd=MySqlRoot;"/>
       </connectionStrings>
+      <appSettings>
+        <add key="NSDQ_raw" value="0.01"/>
+        <add key="DOW_raw" value="0.01"/>
+      </appSettings>
     </configuration> 
 
     CREATE TABLE `SierraOrder` (
@@ -31,7 +35,7 @@ namespace OandaApiBusinessClass.Entity
         INDEX `SierraOrder_InstrumentName` (`SierraInstrumentName`) USING BTREE
     )
     */
-    public class SierraOrderEntity : BaseEntity
+	public class SierraOrderEntity : BaseEntity
     {
         [BaseAttribute(UsedInSql = true)]
         public int SierraOrderId { get; set; }
